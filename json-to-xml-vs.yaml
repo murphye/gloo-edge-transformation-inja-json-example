@@ -1,0 +1,32 @@
+apiVersion: gateway.solo.io/v1
+kind: VirtualService
+metadata:
+  name: json-to-xml
+  namespace: gloo-system
+spec:
+  virtualHost:
+    domains:
+      - '*'
+    routes:
+      - matchers:
+          - methods:
+              - POST
+            prefix: /json-to-xml
+        routeAction:
+          single:
+            upstream:
+              name: default-petstore-8080
+              namespace: gloo-system
+        options:
+          prefixRewrite: /api/pets
+          transformations:
+            requestTransformation:
+              transformationTemplate:
+                headers:
+                  "content-length-calc":
+                    text: '{{ length(body()) }}'
+                  "body-text":
+                    text: '<status>{{status}}</status>'
+                  "body-text-len":
+                    text: '{{ length(header("body-text")) }}'
+
