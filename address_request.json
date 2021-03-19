@@ -1,0 +1,14 @@
+{
+    "address_request": {
+        "address_request_fields": {
+            "line1_text": "123 ABC",
+            "line2_text": "",
+            "line3_text": "",
+            "line4_text": "",
+            "city_text": "ABCD",
+            "region_area_cd": "AB",
+            "postal_code": "12345",
+            "alpha_country_code": "USA"
+        }
+    }
+}
